@@ -1,0 +1,19 @@
+leetcode-problem :70
+class Solution:
+    def climbStairs(self, n: int) -> int:
+        if n <= 2:
+            return n  # Base case: 1 step -> 1 way, 2 steps -> 2 ways
+        
+        first, second = 1, 2  # Initialize for the first two steps
+        
+        for i in range(3, n + 1):
+            current = first + second  # The total ways to reach the current step
+            first = second  # Move to the next step
+            second = current  # Update second to the current step
+        
+        return second  # Return the number of ways to reach the nth step
+
+# Test the function
+solution = Solution()
+n = 5
+print(f"Ways to climb {n} steps: {solution.climbStairs(n)}")  # Expected output: 8
