@@ -1,0 +1,21 @@
+leetcode problem -75
+class Solution:
+    def sortColors(self, nums: list[int]) -> None:
+        low, mid, high = 0, 0, len(nums) - 1
+        
+        while mid <= high:
+            if nums[mid] == 0:
+                nums[low], nums[mid] = nums[mid], nums[low]  # Swap 0 to the front
+                low += 1
+                mid += 1
+            elif nums[mid] == 1:
+                mid += 1  # 1 is already in the correct position, just move on
+            else:  # nums[mid] == 2
+                nums[mid], nums[high] = nums[high], nums[mid]  # Swap 2 to the back
+                high -= 1
+
+# Test the function
+solution = Solution()
+nums = [2, 0, 2, 1, 1, 0]
+solution.sortColors(nums)
+print(f"Sorted array: {nums}")
