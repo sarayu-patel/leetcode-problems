@@ -1,0 +1,50 @@
+leetcode problem-133
+class Node:
+    def __init__(self, val=0, neighbors=None):
+        self.val = val
+        self.neighbors = neighbors if neighbors is not None else []
+
+class Solution:
+    def cloneGraph(self, node: 'Node') -> 'Node':
+        if not node:
+            return None
+        
+        
+        cloned_map = {}
+        
+        
+        def dfs(original_node):
+            if original_node in cloned_map:
+                return cloned_map[original_node]  # Return the cloned node if already cloned
+            
+           
+            clone = Node(original_node.val)
+            cloned_map[original_node] = clone
+            
+            
+            for neighbor in original_node.neighbors:
+                clone.neighbors.append(dfs(neighbor))
+            
+            return clone
+  
+        return dfs(node)
+
+def print_graph(node):
+    visited = set()
+    
+    def dfs(node):
+        if node in visited:
+            return
+        visited.add(node)
+        print(f"Node {node.val} -> Neighbors: {[n.val for n in node.neighbors]}")
+        for neighbor in node.neighbors:
+            dfs(neighbor)
+    
+    dfs(node)
+
+solution = Solution()
+cloned_graph = solution.cloneGraph(node1)
+
+
+print("Cloned Graph:")
+print_graph(cloned_graph)
