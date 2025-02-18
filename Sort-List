@@ -1,0 +1,18 @@
+leetcode problem -148
+
+class Solution:
+    def sortList(self, head: ListNode) -> ListNode:
+        if not head: return None 
+        nodes = []
+        curr = head
+        while curr:
+            nodes.append(curr.val)
+            curr = curr.next
+        nodes.sort()
+        dummy = ListNode()
+        curr = dummy
+        for val in nodes:
+            curr.next = ListNode(val)
+            curr = curr.next
+        
+        return dummy.next
